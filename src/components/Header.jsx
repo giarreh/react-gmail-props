@@ -1,4 +1,7 @@
-export default function Header(){
+import { useState } from "react"
+
+export default function Header(props){
+
   return(
     <header className="header">
     <div className="left-menu">
@@ -13,8 +16,12 @@ export default function Header(){
     </div>
 
     <div className="search">
-      <input className="search-bar" placeholder="Search mail" />
+      <input className="search-bar"
+          placeholder="Search mail"          
+          value={props.searchTerm} 
+          onChange={props.handleSearchInputChange}  ></input>
     </div>
+
     </header>
   )
 }

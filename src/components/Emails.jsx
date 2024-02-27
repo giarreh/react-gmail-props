@@ -2,6 +2,7 @@ import React from 'react';
 import Email from './Email';
 
 export default function Emails(props){
+  
   const handleEmailClick = (email) => {
     props.setSelectedEmail(email);
   };

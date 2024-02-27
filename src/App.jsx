@@ -15,6 +15,7 @@ function App() {
   const [hideRead, setHideRead] = useState(false)
   const [currentTab, setCurrentTab] = useState('inbox')
   const [selectedEmail, setSelectedEmail] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const unreadEmails = emails.filter(email => !email.read)
   const starredEmails = emails.filter(email => email.starred)
@@ -44,9 +45,19 @@ function App() {
   if (currentTab === 'starred')
     filteredEmails = getStarredEmails(filteredEmails)
 
+  if (searchTerm) {
+    filteredEmails = filteredEmails.filter(email =>
+      email.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  const handleSearchInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <div className="app">
-      <Header />
+      <Header handleSearchInputChange={handleSearchInputChange} searchTerm={searchTerm} />
       <LeftNavbar currentTab={currentTab} setCurrentTab={setCurrentTab} unreadEmails={unreadEmails} starredEmails={starredEmails} hideRead={hideRead} setHideRead={setHideRead} />
       <main className="emails">
                 {selectedEmail ? (
